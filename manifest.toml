@@ -6,7 +6,7 @@ description.en = "A simple online notepad, no WYSIWYG, no fancy stuff, just writ
 
 version = "0.1~ynh1"
 
-maintainers = [ghose]
+maintainers = ["ghose"]
 
 [upstream]
 license = "The MIT License"
