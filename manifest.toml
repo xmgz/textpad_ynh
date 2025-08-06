@@ -27,7 +27,7 @@ ram.runtime = "0M"
 
     [install.path]
     type = "path"
-    default = "/site"
+    default = "/textpad"
 
     [install.init_main_permission]
     type = "group"

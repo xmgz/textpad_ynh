@@ -18,12 +18,6 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 nginx_extra_conf_dir="/etc/nginx/conf.d/$domain.d/$app.d"
 mkdir -p "$nginx_extra_conf_dir"
 
-# Prepare nginx extra conf
-if [ $phpversion != "none" ]
-then
-    ynh_add_config --template="nginx-php.conf" --destination="$nginx_extra_conf_dir/php.conf"
-    YNH_PHP_VERSION="$phpversion"
-fi
 
 if [ $custom_error_file -eq 1 ]
 then
