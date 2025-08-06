@@ -28,6 +28,30 @@ ynh_backup --src_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 ynh_backup --src_path="/etc/nginx/conf.d/$domain.d/$app.d"
 
 #=================================================
+# BACKUP THE PHP-FPM CONFIGURATION
+#=================================================
+
+if [ $phpversion != "none" ]
+then
+    ynh_backup --src_path="/etc/php/${phpversion}/fpm/pool.d/$app.conf"
+fi
+
+#=================================================
+# BACKUP THE MYSQL DATABASE
+#=================================================
+
+if [ $database != "none" ]
+then
+    ynh_print_info --message="Backing up the database..."
+
+    if [ $database == "mysql" ]; then
+        ynh_mysql_dump_db --database="$db_name" > db.sql
+    elif [ $database == "postgresql" ]; then
+        ynh_psql_dump_db --database="$db_name" > db.sql
+    fi
+fi
+
+#=================================================
 # END OF SCRIPT
 #=================================================
 
