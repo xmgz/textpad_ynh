@@ -19,12 +19,6 @@ nginx_extra_conf_dir="/etc/nginx/conf.d/$domain.d/$app.d"
 mkdir -p "$nginx_extra_conf_dir"
 
 
-if [ $custom_error_file -eq 1 ]
-then
-    # Add the custom error build with the application
-    ynh_add_config --template="nginx-code-error.conf" --destination="$nginx_extra_conf_dir/error-code.conf"
-fi
-
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config
