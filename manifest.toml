@@ -1,16 +1,15 @@
 packaging_format = 2
 
-id = "my_webapp"
-name = "My Webapp"
-description.en = "Custom Web app with SFTP access to serve static (HTML, CSS, JS) and PHP files"
-description.fr = "Application Web personnalisée avec accès SFTP pour servir des fichiers statiques (HTML, CSS, JS) et PHP"
+id = "textpad"
+name = "TextPad"
+description.en = "A simple online notepad, no WYSIWYG, no fancy stuff, just write."
 
-version = "1.0~ynh21"
+version = "0.1~ynh1"
 
-maintainers = []
+maintainers = [ghose]
 
 [upstream]
-license = "GPL-3.0-only"
+license = "The MIT License"
 
 [integration]
 yunohost = ">= 11.2.4"
@@ -18,9 +17,9 @@ architectures = "all"
 multi_instance = true
 ldap = "not_relevant"
 sso = "not_relevant"
-disk = "50M"
-ram.build = "50M"
-ram.runtime = "50M"
+disk = "1M"
+ram.build = "5M"
+ram.runtime = "0M"
 
 [install]
     [install.domain]
@@ -30,42 +29,10 @@ ram.runtime = "50M"
     type = "path"
     default = "/site"
 
-    [install.with_sftp]
-    ask.en = "Do you need a SFTP access?"
-    ask.fr = "Avez-vous besoin d'un accès SFTP ?"
-    type = "boolean"
-    default = true
-
-    [install.password]
-    type = "password"
-    optional = true
-    help.en = "Optional, this corresponds to the password for SFTP access, if you enabled it"
-    help.fr = "Optionnel, corresponds au mot de passe pour l'accès SFTP, si vous l'avez activé"
-
     [install.init_main_permission]
     type = "group"
     default = "visitors"
 
-    [install.phpversion]
-    ask.en = "Choose a PHP version you want to use for your app"
-    ask.fr = "Choisissez une version PHP que vous souhaitez utiliser pour votre application"
-    type = "select"
-    choices = ["none", "7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]
-    default = "8.4"
-
-    [install.database]
-    ask.en = "Do you need a database?"
-    ask.fr = "Avez-vous besoin d'une base de données ?"
-    type = "select"
-    choices = [ "none", "mysql", "postgresql" ]
-    default = "none"
-
-    [install.custom_error_file]
-    ask.en = "Activate the custom error file use"
-    ask.fr = "Activer l'utilisation du fichier d'erreur personnalisé"
-    type = "boolean"
-    default = false
-    help = "Once custom error enabled, you can add/create a custom `404.html` file in a directory `www/error`."
 
 [resources]
     [resources.system_user]
@@ -76,23 +43,3 @@ ram.runtime = "50M"
     main.url = "/"
 
     [resources.apt]
-    packages = "nginx"  # Kind of "dummy" value to be sure to have a non-empty dep list
-    packages_from_raw_bash = """
-        if [[ "$database" == "mysql" ]]; then
-            echo "mariadb-server"
-
-            if [[ "$phpversion" != none ]]; then
-                echo "php${phpversion}-mysql"
-            fi
-        elif [[ "$database" == "postgresql" ]]; then
-            echo "postgresql postgresql-contrib"
-
-            if [[ "$phpversion" != none ]]; then
-                echo "php${phpversion}-pgsql"
-            fi
-        fi
-
-        if [[ "$phpversion" != none ]]; then
-            echo "php${phpversion}-fpm"
-        fi
-    """
