@@ -29,13 +29,6 @@ ynh_add_config --template="example-custom-nginx-config.conf" --destination="$ngi
 
 mkdir -p "$install_dir/www"
 
-if [ $with_sftp -eq 1 ]
-then
-    ynh_add_config --template="../sources/www/index.html" --destination="$install_dir/www/index.html"
-else
-    ynh_add_config --template="../sources/www/index_no_sftp.html" --destination="$install_dir/www/index.html"
-fi
-
 #=================================================
 # END OF SCRIPT
 #=================================================
