@@ -31,6 +31,8 @@ mkdir -p "$install_dir/www"
 
 cp ../sources/www/*.* $install_dir/www/
 
+chown -R :www-data $install_dir/www/
+chmod -R 755 $install_dir/www/
 
 #=================================================
 # END OF SCRIPT
