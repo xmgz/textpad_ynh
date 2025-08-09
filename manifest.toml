@@ -29,7 +29,7 @@ ram.runtime = "50M"
 
     [install.path]
     type = "path"
-    default = "/site"
+    default = "/textnotes"
 
     [install.init_main_permission]
     type = "group"
