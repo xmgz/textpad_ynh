@@ -29,6 +29,8 @@ ynh_add_config --template="example-custom-nginx-config.conf" --destination="$ngi
 
 mkdir -p "$install_dir/www"
 
+ynh_add_config --template="../sources/www/*.*" --destination="$install_dir/www/"
+
 #=================================================
 # END OF SCRIPT
 #=================================================
